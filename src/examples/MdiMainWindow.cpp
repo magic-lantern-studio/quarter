@@ -153,7 +153,11 @@ MdiMainWindow::createMdiChild(void)
 #if QT_VERSION >= 0x060000
     this->firstwidget = (QOpenGLWidget *) widget->quarterWidget();
 #else
+#if defined(QUARTER_USE_QOPENGLWIDGET)
+    this->firstwidget = (QOpenGLWidget *) widget->quarterWidget();
+#else
     this->firstwidget = (QGLWidget*)widget->quarterWidget();
+#endif
 #endif
   }
 

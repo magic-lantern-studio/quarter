@@ -130,9 +130,16 @@ QuarterWidget::QuarterWidget(const QSurfaceFormat & format, QWidget * parent, co
 {
   this->setFormat(format);
 #else
+#if defined(QUARTER_USE_QOPENGLWIDGET)
+QuarterWidget::QuarterWidget(const QSurfaceFormat & format, QWidget * parent, const QOpenGLWidget* sharewidget, Qt::WindowFlags f)
+  : inherited(parent, f)
+{
+  this->setFormat(format);
+#else
 QuarterWidget::QuarterWidget(const QGLFormat & format, QWidget * parent, const QGLWidget * sharewidget, Qt::WindowFlags f)
   : inherited(format, parent, sharewidget, f)
 {
+#endif
 #endif
   this->constructor(sharewidget);
 }
@@ -142,8 +149,13 @@ QuarterWidget::QuarterWidget(const QGLFormat & format, QWidget * parent, const Q
 QuarterWidget::QuarterWidget(QWidget * parent, const QOpenGLWidget* sharewidget, Qt::WindowFlags f)
   : inherited(parent, f)
 #else
+#if defined(QUARTER_USE_QOPENGLWIDGET)
+QuarterWidget::QuarterWidget(QWidget * parent, const QOpenGLWidget* sharewidget, Qt::WindowFlags f)
+  : inherited(parent, f)
+#else
 QuarterWidget::QuarterWidget(QWidget * parent, const QGLWidget * sharewidget, Qt::WindowFlags f)
   : inherited(parent, sharewidget, f)
+#endif
 #endif
 {
   this->constructor(sharewidget);
@@ -154,8 +166,13 @@ QuarterWidget::QuarterWidget(QWidget * parent, const QGLWidget * sharewidget, Qt
 QuarterWidget::QuarterWidget(QOpenGLContext* context, QWidget * parent, const QOpenGLWidget * sharewidget, Qt::WindowFlags f)
   : inherited(/*context, */parent, f)
 #else
+#if defined(QUARTER_USE_QOPENGLWIDGET)
+QuarterWidget::QuarterWidget(QOpenGLContext* context, QWidget * parent, const QOpenGLWidget * sharewidget, Qt::WindowFlags f)
+  : inherited(/*context, */parent, f)
+#else
 QuarterWidget::QuarterWidget(QGLContext * context, QWidget * parent, const QGLWidget * sharewidget, Qt::WindowFlags f)
   : inherited(context, parent, sharewidget, f)
+#endif
 #endif
 {
   this->constructor(sharewidget);
@@ -165,7 +182,11 @@ void
 #if QT_VERSION >= 0x060000
 QuarterWidget::constructor(const QOpenGLWidget * sharewidget)
 #else
+#if defined(QUARTER_USE_QOPENGLWIDGET)
+QuarterWidget::constructor(const QOpenGLWidget * sharewidget)
+#else
 QuarterWidget::constructor(const QGLWidget* sharewidget)
+#endif
 #endif
 {
   PRIVATE(this) = new QuarterWidgetP(this, sharewidget);

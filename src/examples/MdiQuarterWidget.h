@@ -44,7 +44,11 @@ class QString;
 #if QT_VERSION >= 0x060000
 class QOpenGLWidget;
 #else
+#if defined(QUARTER_USE_QOPENGLWIDGET)
+class QOpenGLWidget;
+#else
 class QGLWidget;
+#endif
 #endif
 using namespace SIM::Coin3D::Quarter;
 
@@ -54,7 +58,11 @@ public:
 #if QT_VERSION >= 0x060000
   MdiQuarterWidget(QWidget * parent = 0, const QOpenGLWidget * sharewidget = 0);
 #else
+#if defined(QUARTER_USE_QOPENGLWIDGET)
+  MdiQuarterWidget(QWidget * parent = 0, const QOpenGLWidget * sharewidget = 0);
+#else
   MdiQuarterWidget(QWidget* parent = 0, const QGLWidget* sharewidget = 0);
+#endif
 #endif
   ~MdiQuarterWidget();
 

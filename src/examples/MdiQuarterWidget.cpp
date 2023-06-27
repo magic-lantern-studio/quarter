@@ -43,7 +43,11 @@ using namespace SIM::Coin3D::Quarter;
 #if QT_VERSION >= 0x060000
 MdiQuarterWidget::MdiQuarterWidget(QWidget * parent, const QOpenGLWidget * sharewidget)
 #else
+#if defined(QUARTER_USE_QOPENGLWIDGET)
+MdiQuarterWidget::MdiQuarterWidget(QWidget * parent, const QOpenGLWidget * sharewidget)
+#else
 MdiQuarterWidget::MdiQuarterWidget(QWidget* parent, const QGLWidget* sharewidget)
+#endif
 #endif
   : inherited(parent)
 {

@@ -61,7 +61,11 @@ public:
 #if QT_VERSION >= 0x060000
   QOpenGLWidget* firstwidget; // for context sharing
 #else
+#if defined(QUARTER_USE_QOPENGLWIDGET)
+  QOpenGLWidget* firstwidget; // for context sharing
+#else
   QGLWidget* firstwidget; // for context sharing
+#endif
 #endif
   QDesignerFormEditorInterface * formeditor;
   QList<QAction *> transparencytypeactions;

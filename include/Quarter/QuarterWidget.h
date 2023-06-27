@@ -42,7 +42,11 @@
 #if QT_VERSION >= 0x060000
 #include <QOpenGLWidget>
 #else
+#if defined(QUARTER_USE_QOPENGLWIDGET)
+#include <QOpenGLWidget>
+#else
 #include <QGLWidget>
+#endif
 #endif
 #include <Quarter/Basic.h>
 
@@ -65,8 +69,13 @@ const char DEFAULT_NAVIGATIONFILE []  = "coin:///scxml/navigation/examiner.xml";
 class QUARTER_DLL_API QuarterWidget : public QOpenGLWidget {
   typedef QOpenGLWidget inherited;
 #else
+#if defined(QUARTER_USE_QOPENGLWIDGET)
+class QUARTER_DLL_API QuarterWidget : public QOpenGLWidget {
+  typedef QOpenGLWidget inherited;
+#else
 class QUARTER_DLL_API QuarterWidget : public QGLWidget {
   typedef QGLWidget inherited;
+#endif
 #endif
   Q_OBJECT
 
@@ -95,9 +104,15 @@ public:
   explicit QuarterWidget(QOpenGLContext * context, QWidget * parent = 0, const QOpenGLWidget* sharewidget = 0, Qt::WindowFlags f = Qt::WindowFlags());
   explicit QuarterWidget(const QSurfaceFormat & format, QWidget * parent = 0, const QOpenGLWidget* shareWidget = 0, Qt::WindowFlags f = Qt::WindowFlags());
 #elif QT_VERSION >= 0x050F00
+#if defined(QUARTER_USE_QOPENGLWIDGET)
+  explicit QuarterWidget(QWidget * parent = 0, const QOpenGLWidget* sharewidget = 0, Qt::WindowFlags f = Qt::WindowFlags());
+  explicit QuarterWidget(QOpenGLContext * context, QWidget * parent = 0, const QOpenGLWidget* sharewidget = 0, Qt::WindowFlags f = Qt::WindowFlags());
+  explicit QuarterWidget(const QSurfaceFormat & format, QWidget * parent = 0, const QOpenGLWidget* shareWidget = 0, Qt::WindowFlags f = Qt::WindowFlags());
+#else  
   explicit QuarterWidget(QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = Qt::WindowFlags());
   explicit QuarterWidget(QGLContext * context, QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = Qt::WindowFlags());
   explicit QuarterWidget(const QGLFormat & format, QWidget * parent = 0, const QGLWidget * shareWidget = 0, Qt::WindowFlags f = Qt::WindowFlags());
+#endif
 #else
   explicit QuarterWidget(QWidget* parent = 0, const QGLWidget* sharewidget = 0, Qt::WindowFlags f = 0);
   explicit QuarterWidget(QGLContext* context, QWidget* parent = 0, const QGLWidget* sharewidget = 0, Qt::WindowFlags f = 0);
@@ -219,7 +234,11 @@ private:
 #if QT_VERSION >= 0x060000
   void constructor(const QOpenGLWidget* sharewidget);
 #else
+#if defined(QUARTER_USE_QOPENGLWIDGET)
+  void constructor(const QOpenGLWidget* sharewidget);
+#else
   void constructor(const QGLWidget* sharewidget);
+#endif
 #endif
   friend class QuarterWidgetP;
   class QuarterWidgetP * pimpl;

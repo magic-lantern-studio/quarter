@@ -48,7 +48,11 @@ class QuarterWidgetP_cachecontext;
 #if QT_VERSION >= 0x060000
   class QOpenGLWidget;
 #else
+#if defined(QUARTER_USE_QOPENGLWIDGET)
+  class QOpenGLWidget;
+#else
   class QGLWidget;
+#endif
 #endif
 class QAction;
 class QActionGroup;
@@ -69,7 +73,11 @@ public:
 #if QT_VERSION >= 0x060000
   QuarterWidgetP(class QuarterWidget * master, const QOpenGLWidget * sharewidget);
 #else
+#if defined(QUARTER_USE_QOPENGLWIDGET)
+  QuarterWidgetP(class QuarterWidget * master, const QOpenGLWidget * sharewidget);
+#else
   QuarterWidgetP(class QuarterWidget * master, const QGLWidget * sharewidget);
+#endif
 #endif
   ~QuarterWidgetP();
 
@@ -124,8 +132,13 @@ public:
   QuarterWidgetP_cachecontext * findCacheContext(QuarterWidget * widget, const QOpenGLWidget * sharewidget);
   static void removeFromCacheContext(QuarterWidgetP_cachecontext * context, const QOpenGLWidget* widget);
 #else
+#if defined(QUARTER_USE_QOPENGLWIDGET)
+  QuarterWidgetP_cachecontext * findCacheContext(QuarterWidget * widget, const QOpenGLWidget * sharewidget);
+  static void removeFromCacheContext(QuarterWidgetP_cachecontext * context, const QOpenGLWidget* widget);
+#else
   QuarterWidgetP_cachecontext * findCacheContext(QuarterWidget * widget, const QGLWidget * sharewidget);
   static void removeFromCacheContext(QuarterWidgetP_cachecontext * context, const QGLWidget * widget);
+#endif
 #endif
 };
 

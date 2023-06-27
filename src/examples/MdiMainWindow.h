@@ -40,7 +40,11 @@ class QString;
 #if QT_VERSION >= 0x060000
 class QOpenGLWidget;
 #else
+#if defined(QUARTER_USE_QOPENGLWIDGET)
+class QOpenGLWidget;
+#else
 class QGLWidget;
+#endif
 #endif
 class QMdiArea;
 class QDropEvent;
@@ -73,7 +77,11 @@ private:
 #if QT_VERSION >= 0x060000
   QOpenGLWidget* firstwidget; // for context sharing
 #else
+#if defined(QUARTER_USE_QOPENGLWIDGET)
+  QOpenGLWidget* firstwidget; // for context sharing
+#else
   QGLWidget* firstwidget; // for context sharing
+#endif
 #endif
 };
 
