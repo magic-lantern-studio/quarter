@@ -117,6 +117,10 @@ if(WIN32)
   endif()
 endif()
 
+if(QUARTER_USE_QOPENGLWIDGET)
+  target_compile_definitions(${PROJECT_NAME} PRIVATE QUARTER_USE_QOPENGLWIDGET=${QUARTER_USE_QOPENGLWIDGET})
+endif()
+
 target_include_directories(${PROJECT_NAME}
   PUBLIC
     $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/src>

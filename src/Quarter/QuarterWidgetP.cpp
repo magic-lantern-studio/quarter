@@ -39,6 +39,9 @@
 #include <QCursor>
 #include <QMenu>
 #include <QMap>
+#if defined(QUARTER_USE_QOPENGLWIDGET)
+#include <QOpenGLContext>
+#endif
 
 #include <Inventor/nodes/SoCamera.h>
 #include <Inventor/nodes/SoNode.h>

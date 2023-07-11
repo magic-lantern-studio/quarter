@@ -159,7 +159,11 @@ DragDropHandlerP::dropEvent(QDropEvent * event)
 #if (QT_VERSION >= 0x060000)
   this->quarterwidget->update();
 #else
-  this->quarterwidget->updateGL();
+  #if defined(QUARTER_USE_QOPENGLWIDGET)
+    this->quarterwidget->update();
+  #else
+    this->quarterwidget->updateGL();
+  #endif
 #endif
 }
 

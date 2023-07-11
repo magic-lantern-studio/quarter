@@ -823,7 +823,11 @@ QuarterWidget::redraw(void)
 #if (QT_VERSION >= 0x060000)
   this->update();
 #else
-  this->updateGL();
+  #if defined(QUARTER_USE_QOPENGLWIDGET)
+    this->update();
+  #else
+    this->updateGL();
+  #endif
 #endif
 }
 
