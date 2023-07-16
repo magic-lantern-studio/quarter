@@ -39,8 +39,12 @@
 #include <QCursor>
 #include <QMenu>
 #include <QMap>
+#if QT_VERSION >= 0x060000
+#include <QOpenGLContext>
+#else
 #if defined(QUARTER_USE_QOPENGLWIDGET)
 #include <QOpenGLContext>
+#endif
 #endif
 
 #include <Inventor/nodes/SoCamera.h>
